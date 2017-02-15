@@ -1,0 +1,9 @@
+.Board {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.Board-row {
+  display: flex;
+}
