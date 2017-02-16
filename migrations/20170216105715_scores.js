@@ -2,7 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('scores', (table) => {
     table.increments()
-    table.integer('Score').notNullable().defaultTo(0)
+    table.integer('score').notNullable().defaultTo(0)
     table.integer('user_id').notNullable()
       .references('id').inTable('users').index()
     table.timestamps(true, true)

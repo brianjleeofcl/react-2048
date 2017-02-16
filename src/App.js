@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 import GameBoard from './board/Board';
 import HighScores from './scores/High-scores';
 import './App.css';

@@ -5,7 +5,6 @@ import movements from './movement'
 import checkMoves from './status'
 import Square from './Square'
 import Modal from '../modal/Modal'
-import HighScores from '../scores/High-scores'
 import './Board.css'
 
 const initialBoard = new Board(4)
