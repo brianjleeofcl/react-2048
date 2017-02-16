@@ -3,6 +3,7 @@ class Board {
     this.array = Array(n * n).fill(0)
     this.scale = n
     this.score = 0
+    this.spaces = this.array.length
   }
 
   get matrix() {
@@ -28,6 +29,7 @@ class Board {
     this.newSquare(index1)
     this.newSquare(index2)
     this.calcScore()
+    this.updateRemainingSpaces()
   }
 
   newSquare(index) {
@@ -36,6 +38,10 @@ class Board {
 
   calcScore() {
     this.score = this.array.reduce((a,b) => a + b, 0)
+  }
+
+  updateRemainingSpaces() {
+    this.spaces = this.array.filter(num => num === 0).length
   }
 }
 

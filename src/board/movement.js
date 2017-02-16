@@ -38,6 +38,7 @@ const movements = {
       const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
       output.newSquare(newIndex)
       output.calcScore()
+      output.updateRemainingSpaces()
       return output
     }
   },
@@ -81,6 +82,7 @@ const movements = {
       const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
       output.newSquare(newIndex)
       output.calcScore()
+      output.updateRemainingSpaces()
       return output
     }
   },
@@ -138,6 +140,7 @@ const movements = {
       const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
       output.newSquare(newIndex)
       output.calcScore()
+      output.updateRemainingSpaces()
       return output
     }
   },
@@ -197,6 +200,7 @@ const movements = {
       const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
       output.newSquare(newIndex)
       output.calcScore()
+      output.updateRemainingSpaces()
       return output
     }
   }
