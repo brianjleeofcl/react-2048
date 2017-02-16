@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import Board from './board-class'
 import movements from './movement'
 import checkMoves from './status'
 import Square from './Square'
-import './Board.css'
 import Modal from '../modal/Modal'
+import HighScores from '../scores/High-scores'
+import './Board.css'
 
 const initialBoard = new Board(4)
 initialBoard.init()
@@ -49,9 +51,9 @@ class GameBoard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Board-background">
+        <Link to="/scores">High Scores</Link>
         <h3>{this.state.board.score}</h3>
-        <h3>{this.state.status.toString()}</h3>
         <div className="Board">
           {this.state.board.matrix.map((arr, i) => <div className="Board-row" key={i}>
             {arr.map((num, j) => <Square key={j}>{num}</Square>)}

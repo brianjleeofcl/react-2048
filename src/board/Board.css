@@ -1,3 +1,6 @@
+.Board-background {
+  color: white
+}
 .Board {
   display: flex;
   flex-flow: column;
