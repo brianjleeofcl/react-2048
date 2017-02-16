@@ -4,6 +4,7 @@ import movements from './movement'
 import checkMoves from './status'
 import Square from './Square'
 import './Board.css'
+import Modal from '../modal/Modal'
 
 const initialBoard = new Board(4)
 initialBoard.init()
@@ -56,6 +57,13 @@ class GameBoard extends Component {
             {arr.map((num, j) => <Square key={j}>{num}</Square>)}
           </div>)}
         </div>
+        {!this.state.status
+          ? <Modal>
+            <h3>Game Over</h3>
+            <p>Final Score: {this.state.board.score}</p>
+          </Modal>
+          : ''
+        }
       </div>
     );
   }

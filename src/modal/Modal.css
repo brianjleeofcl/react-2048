@@ -1,0 +1,21 @@
+.Modal-background {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(240,240,240,.75);
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.Modal {
+  padding: 30px;
+  border-radius: 15px;
+  background-color: #fff;
+  min-width: 75%;
+  min-height: 75$;
+}

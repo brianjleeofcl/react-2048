@@ -16,5 +16,5 @@ export default function(board) {
     arr.push(eql(board.array, results[direction]))
   }
 
-  return arr.every(bool => !bool)
+  return !arr.every(bool => bool)
 }

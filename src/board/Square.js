@@ -3,13 +3,19 @@ import './Square.css'
 
 
 export default function Square({ children }) {
-  const map = {
-    '0': 'white',
-    '2': 'yellow',
-    '4': 'orange',
-    '8': 'red',
-    '16': 'magenta',
-    '32': 'purple'
+  const colorMap = {
+    '0': '#000000',
+    '2': '#1588ff',
+    '4': '#00b1ff',
+    '8': '#00d8ff',
+    '16': '#66e7ff',
+    '32': '#b2f3ff',
+    '64': '#ffffff',
+    '128': '#ffffff',
+    '256': '#ffffff',
+    '512': '#ffffff',
+    '1024': '#ffffff',
+    '2048': '#ffffff'
   }
-  return <div className="Square" style={{backgroundColor: `${map[children]}`}}>{children}</div>
+  return <div className="Square" style={{backgroundColor: `${colorMap[children]}`}}>{children}</div>
 }
