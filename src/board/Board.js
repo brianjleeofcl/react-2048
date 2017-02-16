@@ -5,7 +5,7 @@ import Square from './Square'
 import './Board.css'
 
 const initialBoard = new Board(4)
-initialBoard.array = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+initialBoard.init()
 
 class GameBoard extends Component {
   constructor(prop) {
@@ -41,10 +41,13 @@ class GameBoard extends Component {
 
   render() {
     return (
-      <div className="Board">
-        {this.state.board.matrix.map((arr, i) => <div className="Board-row" key={i}>
-          {arr.map((num, j) => <Square key={j}>{num}</Square>)}
-        </div>)}
+      <div>
+        <div>{this.state.board.score}</div>
+        <div className="Board">
+          {this.state.board.matrix.map((arr, i) => <div className="Board-row" key={i}>
+            {arr.map((num, j) => <Square key={j}>{num}</Square>)}
+          </div>)}
+        </div>
       </div>
     );
   }

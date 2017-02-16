@@ -3,6 +3,7 @@ import Board from './board-class'
 const movements = {
   left(board) {
     const matrix = Array.from(board.matrix)
+    const n = board.scale
 
     for (const row of matrix) {
       let done = 0
@@ -22,13 +23,28 @@ const movements = {
       }
     }
 
-    const output = new Board(board.scale)
+    const output = new Board(n)
     output.matrix = matrix
-    return output
+
+    if(eql(board.array, output.array)) {
+      return board
+    } else {
+      const emptySpots = []
+      for (let i = 0; i < n; i++) {
+        if (!output.array[(n - 1) + i * n]) {
+          emptySpots.push((n - 1) + i * n)
+        }
+      }
+      const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
+      output.newSquare(newIndex)
+      output.calcScore()
+      return output
+    }
   },
 
   right(board) {
     const matrix = Array.from(board.matrix)
+    const n = board.scale
 
     for (const row of matrix) {
       row.reverse()
@@ -50,9 +66,23 @@ const movements = {
       row.reverse()
     }
 
-    const output = new Board(board.scale)
+    const output = new Board(n)
     output.matrix = matrix
-    return output
+
+    if(eql(board.array, output.array)) {
+      return board
+    } else {
+      const emptySpots = []
+      for (let i = 0; i < n; i++) {
+        if (!output.array[i * n]) {
+          emptySpots.push(i * n)
+        }
+      }
+      const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
+      output.newSquare(newIndex)
+      output.calcScore()
+      return output
+    }
   },
 
   up(board) {
@@ -95,7 +125,21 @@ const movements = {
 
     const output = new Board(n)
     output.array = outputArr
-    return output
+
+    if(eql(board.array, output.array)) {
+      return board
+    } else {
+      const emptySpots = []
+      for (let i = n ** 2 - n; i < n ** 2; i++) {
+        if (!output.array[i]) {
+          emptySpots.push(i)
+        }
+      }
+      const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
+      output.newSquare(newIndex)
+      output.calcScore()
+      return output
+    }
   },
 
   down(board) {
@@ -140,8 +184,26 @@ const movements = {
 
     const output = new Board(n)
     output.array = outputArr
-    return output
+
+    if(eql(board.array, output.array)) {
+      return board
+    } else {
+      const emptySpots = []
+      for (let i = 0; i < n; i++) {
+        if (!output.array[i]) {
+          emptySpots.push(i)
+        }
+      }
+      const newIndex = emptySpots[Math.floor(Math.random() * emptySpots.length)]
+      output.newSquare(newIndex)
+      output.calcScore()
+      return output
+    }
   }
+}
+
+function eql(arr1, arr2) {
+  return arr1.every((_, i) => arr1[i] === arr2[i])
 }
 
 export default movements;
