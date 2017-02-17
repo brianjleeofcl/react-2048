@@ -3,10 +3,10 @@ const app = express()
 
 app.use(
   require('morgan')('dev'),
-  require('body-parser'),
-  require('cookie-parser')
+  require('body-parser').json(),
+  require('cookie-parser')()
 )
 
-app.use('/api', require('./api/api'))
+app.use('/api',require('./api/api'))
 
 module.exports = app;
