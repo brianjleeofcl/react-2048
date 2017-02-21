@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+const rid = require('readable-id');
 
 const express = require('express');
 const router = express.Router()
@@ -17,7 +18,7 @@ router.get('/', (req, res) => {
       }).send({ userId, name, logged: false })
     })
   } else {
-    const name = 'RandomlyGeneratedName'
+    const name = rid()
     knex('users').insert({ name, hash_pw: null }, '*').then(arr => {
       const userId = arr[0].id
       res.cookie('userId', userId, {

@@ -19,7 +19,7 @@ router.post('/game', (req, res) => {
 
 router.patch('/game', (req, res) => {
   const { id, score } = req.body
-  const updated_at = Date.now()
+  const updated_at = new Date()
   knex('scores').where('id', id).update({ score, updated_at }, '*').then(arr => {
     res.send(arr[0])
   })
