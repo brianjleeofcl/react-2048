@@ -8,24 +8,27 @@ import Square from './Square'
 import Modal from '../modal/Modal'
 import './Board.css'
 
-const initialBoard = new Board(4)
-initialBoard.init()
 
 class GameBoard extends Component {
   constructor(prop) {
     super(prop)
-    window.addEventListener('keydown', this.handleKey)
+    window.addEventListener('keydown', this.handleKey.bind(this))
+
+    const initialBoard = new Board(4)
+    initialBoard.init()
+
     this.state = {
       board: initialBoard, status: true, userId: null, gameId: null
     }
     this.moveBoard = this.moveBoard.bind(this)
-    this.handleKey = this.handleKey.bind(this)
     this.handleData = this.handleData.bind(this)
     this.getGameId = this.getGameId.bind(this)
     this.sendScore = this.sendScore.bind(this)
+    this.componentWillUnmount = this.componentWillUnmount.bind(this)
   }
 
-  handleKey = (event) => {
+  handleKey(event) {
+    console.log(event.timeStamp);
     if (event.which === 37) {
       this.moveBoard('left')
     }
@@ -103,6 +106,12 @@ class GameBoard extends Component {
 
   componentDidMount() {
     request.get('/api/users/').then(({data}) => this.handleData(data))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKey.bind(this))
+    this.setState({ board: '' })
+    console.log('unmount called?');
   }
 }
 

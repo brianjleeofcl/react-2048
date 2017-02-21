@@ -1,0 +1,3 @@
+.High-scores-table tr:nth-child(2n) {
+  background-color: #eee
+}

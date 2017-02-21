@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import request from 'axios'
 import Modal from '../modal/Modal'
+import './High-scores.css'
 
 class HighScores extends Component {
   constructor(props) {
@@ -16,7 +17,22 @@ class HighScores extends Component {
   render() {
     return <Modal>
       <h2>High Scores</h2>
-      {this.state.scores.map((obj, i) => <p key={obj.id}>{i + 1}. {obj.score}, {obj.name}</p>)}
+      <table className="High-scores-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Score</th>
+            <th>Player</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.scores.map((obj, i) => <tr key={obj.id}>
+            <td>#{i + 1}</td>
+            <td>{obj.score}</td>
+            <td>{obj.name}</td>
+          </tr>)}
+        </tbody>
+      </table>
     </Modal>
   }
 }
