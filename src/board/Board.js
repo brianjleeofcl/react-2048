@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
+import request from 'axios'
 import Board from './board-class'
 import movements from './movement'
 import checkMoves from './status'
@@ -15,22 +16,13 @@ class GameBoard extends Component {
     super(prop)
     window.addEventListener('keydown', this.handleKey)
     this.state = {
-      board: initialBoard, status: true
+      board: initialBoard, status: true, userId: null, gameId: null
     }
     this.moveBoard = this.moveBoard.bind(this)
     this.handleKey = this.handleKey.bind(this)
-  }
-
-  moveBoard(str) {
-    const newBoard = movements[str](this.state.board)
-
-    if (!newBoard.spaces) {
-      const newStatus = checkMoves(this.state.board)
-
-      this.setState({ status: newStatus })
-    }
-
-    this.setState({ board: newBoard })
+    this.handleData = this.handleData.bind(this)
+    this.getGameId = this.getGameId.bind(this)
+    this.sendScore = this.sendScore.bind(this)
   }
 
   handleKey = (event) => {
@@ -46,6 +38,46 @@ class GameBoard extends Component {
     if (event.which === 40) {
       this.moveBoard('down')
     }
+  }
+
+  moveBoard(str) {
+    const newBoard = movements[str](this.state.board)
+
+    if (!newBoard.spaces) {
+      const newStatus = checkMoves(this.state.board)
+
+      this.setState({ status: newStatus })
+    }
+
+    this.setState({ board: newBoard })
+    this.sendScore()
+  }
+
+  sendScore() {
+    const id = this.state.gameId
+    const score = this.state.board.score
+    console.log(id);
+
+    if (!id) {
+      return this.getGameId()
+    }
+    request.patch('/api/scores/game', {id, score}).then(({data}) => console.log(data))
+  }
+
+  getGameId() {
+    const userId = this.state.userId
+    const score = this.state.board.score
+
+    request.post('/api/scores/game', { userId, score }).then(({data}) => {
+      console.log(data);
+      this.setState({ gameId: data.id })
+    })
+  }
+
+  handleData(data) {
+    const { userId, logged, name } = data
+
+    this.setState({ userId })
   }
 
   render() {
@@ -67,6 +99,10 @@ class GameBoard extends Component {
         }
       </div>
     );
+  }
+
+  componentDidMount() {
+    request.get('/api/users/').then(({data}) => this.handleData(data))
   }
 }
 

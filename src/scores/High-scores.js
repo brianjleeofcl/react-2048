@@ -16,7 +16,7 @@ class HighScores extends Component {
   render() {
     return <Modal>
       <h2>High Scores</h2>
-      {this.state.scores.map(obj => <p>{obj.score}, {obj.user_name}</p>)}
+      {this.state.scores.map((obj, i) => <p key={obj.id}>{i + 1}. {obj.score}, {obj.name}</p>)}
     </Modal>
   }
 }
