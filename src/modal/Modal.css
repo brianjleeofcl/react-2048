@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: rgba(240,240,240,.75);
+  background-color: rgba(240,240,240,.55);
   min-width: 100vw;
   min-height: 100vh;
 }
