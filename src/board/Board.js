@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import Square from './Square'
 import BlankSquare from './blank-square'
 import Modal from '../modal/Modal'
@@ -10,8 +10,8 @@ export default function GameBoard({board, status, resetBoard}) {
   return (
     <div className="Board-background">
       <Link to="/scores">High Scores</Link>
-      <div>
-        <Button>{board.score}</Button>
+      <div className="Board-buttons">
+        <Button click={() => browserHistory.push('/scores')}>Current score: {board.score}</Button>
         <Button click={resetBoard}>Reset</Button>
       </div>
       <div className="Board">

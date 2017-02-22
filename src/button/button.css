@@ -8,3 +8,7 @@
   font-size: 1.3em;
   display: inline-block;
 }
+
+.Button:hover {
+  background-color: #00b1ff
+}

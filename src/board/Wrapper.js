@@ -12,7 +12,11 @@ class Wrapper extends Component {
     const initialBoard = new Board(4)
     initialBoard.init()
     this.state = {
-      board: initialBoard, status: true, userId: null, gameId: null
+      board: initialBoard,
+      status: true,
+      userId: null,
+      gameId: null,
+      name: ''
     }
     this.moveBoard = this.moveBoard.bind(this)
     this.handleData = this.handleData.bind(this)
@@ -56,22 +60,27 @@ class Wrapper extends Component {
     if (!id) {
       return this.getGameId()
     }
-    request.patch('/api/scores/game', {id, score}).then(({data}) => console.log(data))
+
+    request.patch('/api/scores/game', {id, score}).catch(err => console.error(err))
   }
 
   getGameId() {
     const userId = this.state.userId
     const score = this.state.board.score
 
-    request.post('/api/scores/game', { userId, score }).then(({data}) => {
-      this.setState({ gameId: data.id })
-    })
+    if (userId) {
+      request.post('/api/scores/game', { userId, score }).then(({data}) => {
+        this.setState({ gameId: data.id })
+      })
+    } else {
+      request.get('/api/users').then(({data}) => this.handleData(data))
+    }
   }
 
   handleData(data) {
     const { userId, logged, name } = data
 
-    this.setState({ userId })
+    this.setState({ userId, name })
   }
 
   resetBoard() {
@@ -88,7 +97,10 @@ class Wrapper extends Component {
   render() {
     const {board, status} = this.state
     const resetBoard = this.resetBoard
-    return React.cloneElement(this.props.children, {board, status, resetBoard})
+    return <div>
+      <p>Welcome, {this.state.name}.</p>
+      {React.cloneElement(this.props.children, {board, status, resetBoard})}
+    </div>
   }
 
   componentDidMount() {
